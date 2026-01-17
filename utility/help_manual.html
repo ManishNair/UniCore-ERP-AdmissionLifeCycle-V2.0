@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniCore ERP V2.0 | Testing & Operations Manual</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; scroll-behavior: smooth; }
+        .chapter-card { transition: all 0.3s ease; border: 1px solid #e2e8f0; }
+        .chapter-card:hover { transform: translateY(-5px); border-color: #3b82f6; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+    </style>
+</head>
+<body class="flex">
+
+    <nav class="w-80 h-screen bg-slate-900 text-white p-8 fixed overflow-y-auto">
+        <h1 class="text-2xl font-black italic tracking-tighter mb-12">UniCore <span class="text-blue-500">Manual</span></h1>
+        <ul class="space-y-6 text-sm font-bold uppercase tracking-widest text-slate-400">
+            <li><a href="#ch1" class="hover:text-blue-400 transition-colors"><span class="text-blue-600 mr-2">01</span> Environment Setup</a></li>
+            <li><a href="#ch2" class="hover:text-blue-400 transition-colors"><span class="text-blue-600 mr-2">02</span> RBAC Governance</a></li>
+            <li><a href="#ch3" class="hover:text-blue-400 transition-colors"><span class="text-blue-600 mr-2">03</span> Lead Ingestion</a></li>
+            <li><a href="#ch4" class="hover:text-blue-400 transition-colors"><span class="text-blue-600 mr-2">04</span> Compliance Terminal</a></li>
+            <li><a href="#ch5" class="hover:text-blue-400 transition-colors"><span class="text-blue-600 mr-2">05</span> Financial Gate</a></li>
+        </ul>
+    </nav>
+
+    <main class="ml-80 p-16 max-w-5xl">
+        
+        <header class="mb-20">
+            <span class="bg-blue-600 text-white text-[10px] font-black px-4 py-1.5 rounded-full uppercase italic">V2.0 Production Ready</span>
+            <h1 class="text-6xl font-[900] text-slate-900 mt-6 tracking-tighter">System Testing <span class="text-blue-600 italic">Instructions.</span></h1>
+            <p class="text-xl text-slate-500 mt-4 leading-relaxed">A step-by-step guide to validating the UniCore ERP architecture, from database provisioning to cross-institutional lead routing.</p>
+        </header>
+
+        <section id="ch1" class="mb-24 scroll-mt-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 bg-slate-900 text-white rounded-2xl flex items-center justify-center font-black italic">01</div>
+                <h2 class="text-3xl font-black text-slate-900 uppercase italic">Environment Setup</h2>
+            </div>
+            <div class="chapter-card bg-white p-10 rounded-[40px]">
+                <p class="text-slate-600 mb-6 font-medium">To begin the demo, you must first provision the database and server folders.</p>
+                <div class="space-y-4">
+                    <div class="flex gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <i class="fas fa-play text-blue-600 mt-1"></i>
+                        <div>
+                            <p class="font-black text-slate-900 uppercase text-xs">Step 1.1: Run setup_demo.php</p>
+                            <p class="text-sm text-slate-500">Navigate to <code>http://localhost/unicore_erp/setup_demo.php</code>. This script builds the <code>unicore_db</code>, seeds data, and creates the <code>/uploads/docs/</code> directory.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4 p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <i class="fas fa-user-shield text-blue-600 mt-1"></i>
+                        <div>
+                            <p class="font-black text-slate-900 uppercase text-xs">Step 1.2: Admin Authentication</p>
+                            <p class="text-sm text-slate-500">Login at <code>login.php</code> using <b>admin / admin123</b>. This account is pre-mapped to the Superadmin role.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="#ch2" class="mb-24 scroll-mt-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 bg-slate-900 text-white rounded-2xl flex items-center justify-center font-black italic">02</div>
+                <h2 class="text-3xl font-black text-slate-900 uppercase italic">RBAC Governance</h2>
+            </div>
+            <div class="chapter-card bg-white p-10 rounded-[40px]">
+                <p class="text-slate-600 mb-6 font-medium">UniCore V2.0 uses a Dynamic Access Matrix.</p>
+                <ul class="list-disc ml-6 space-y-3 text-slate-500 text-sm font-medium">
+                    <li>Navigate to <b>Access Matrix</b> in the sidebar.</li>
+                    <li>Toggle a permission (e.g., <code>social_router</code>) for a role.</li>
+                    <li>The system uses AJAX to sync the <code>role_permissions</code> table instantly.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="ch3" class="mb-24 scroll-mt-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 bg-slate-900 text-white rounded-2xl flex items-center justify-center font-black italic">03</div>
+                <h2 class="text-3xl font-black text-slate-900 uppercase italic">Lead Ingestion & Grouping</h2>
+            </div>
+            <div class="chapter-card bg-white p-10 rounded-[40px]">
+                <p class="text-slate-600 mb-6 font-medium">Test the "Single Group" logic for multi-course applicants.</p>
+                <div class="bg-indigo-900 text-white p-8 rounded-3xl mb-6">
+                    <p class="text-[10px] font-black uppercase tracking-widest text-indigo-300 mb-2">Scenario: The John Doe Duplicate</p>
+                    <p class="text-sm italic">"John applies for Engineering via WhatsApp, then applies for Business via API using the same phone number."</p>
+                </div>
+                <p class="text-sm text-slate-500 leading-relaxed">The system detects the duplicate phone, assigns a <code>group_tag</code>, and creates two distinct leads. This prevents data overwriting while keeping the student's profile linked.</p>
+            </div>
+        </section>
+
+        <section id="ch4" class="mb-24 scroll-mt-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="w-12 h-12 bg-slate-900 text-white rounded-2xl flex items-center justify-center font-black italic">04</div>
+                <h2 class="text-3xl font-black text-slate-900 uppercase italic">Compliance Terminal</h2>
+            </div>
+            <div class="chapter-card bg-white p-10 rounded-[40px]">
+                <p class="text-slate-600 mb-6 font-medium">Verify documents and monitor engagement.</p>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="p-6 bg-slate-50 rounded-3xl border">
+                        <p class="font-black text-[10px] uppercase text-blue-600 mb-2">Document Verification</p>
+                        <p class="text-xs text-slate-500">Attach a sample file to 'High School Marksheet'. Once 4 docs are 'Verified', the system unlocks the 'Finalize' button.</p>
+                    </div>
+                    <div class="p-6 bg-slate-50 rounded-3xl border">
+                        <p class="font-black text-[10px] uppercase text-indigo-600 mb-2">Group Awareness</p>
+                        <p class="text-xs text-slate-500">Notice the "Multi-Lead Profile" badge. Clicking the "Also Applied" chips switches the terminal between John's two applications.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="mt-20 pt-10 border-t border-slate-200 text-center">
+            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">UniCore ERP V2.0 Documentation • Bhopal, India • 2026</p>
+        </footer>
+
+    </main>
+
+</body>
+</html>
